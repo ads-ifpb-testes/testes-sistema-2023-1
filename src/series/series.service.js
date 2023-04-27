@@ -2,7 +2,7 @@ import seriesRepository from "./series.repository";
 class SeriesService {
   constructor() {}
 
-  add(serie) {
+  add(serie, isTesting) {
     const contemTitulo = "titulo" in serie && serie.titulo !== "";
     if (!contemTitulo) {
       throw Error("Série não contem titulo");

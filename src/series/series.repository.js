@@ -1,7 +1,7 @@
 const series = [];
 
 function adicionar(serie) {
-  //   series.push(serie);
+  series.push(serie);
 }
 
 function remover(serie) {
