@@ -1,36 +1,47 @@
-const series = [];
+class SeriesRepository {
+  constructor(knexClient) {
+    this.knexClient = knexClient;
+  }
 
-function adicionar(serie) {
-  series.push(serie);
+  async salvar(serie) {
+    const { titulo, ano } = serie;
+    const [series] = await this.knexClient("series")
+      .insert({ titulo, ano })
+      .returning("*");
+    return series;
+  }
+
+  async buscar(id) {
+    const [series] = await this.knexClient("series").where({ id });
+    return series;
+  }
+
+  async listar() {
+    const series = await this.knexClient("series");
+    return series;
+  }
+
+  async getQtde() {
+    const series = await this.knexClient("series");
+    return series.length;
+  }
+
+  async atualizar(serie) {
+    const { id, titulo, ano } = serie;
+    const [series] = await this.knexClient("series")
+      .where({ id })
+      .update({ titulo, ano })
+      .returning("*");
+    return series;
+  }
+
+  async remover(id) {
+    const [series] = await this.knexClient("series")
+      .where({ id })
+      .delete()
+      .returning("*");
+    return series;
+  }
 }
 
-function remover(serie) {
-  const indiceSerie = series.findIndex(
-    (serieSalva) => serieSalva.titulo === serie.titulo
-  );
-  series.splice(indiceSerie, 1);
-}
-
-function getQtde() {
-  return series.length;
-}
-
-function buscar(serie) {
-  console.log("Buscando série...");
-  const indiceSerie = series.findIndex(
-    (serieSalva) => serieSalva.titulo === serie.titulo
-  );
-  return series[indiceSerie];
-}
-
-function listar() {
-  return Array.from(series);
-}
-
-export default {
-  adicionar,
-  remover,
-  buscar,
-  getQtde,
-  listar,
-};
+export default SeriesRepository;
