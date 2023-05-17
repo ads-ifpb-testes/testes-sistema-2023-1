@@ -43,7 +43,6 @@ describe("Integração com o banco de dados", () => {
       ano: 2018,
     };
     const serieSalva = await seriesRepository.salvar(serie);
-    console.log(serieSalva);
     expect(serieSalva).toBeDefined();
     expect(serieSalva.id).toBeDefined();
   });
@@ -60,7 +59,6 @@ describe("Integração com o banco de dados", () => {
     const serieSalva1 = await seriesRepository.salvar(serie1);
     const serieSalva2 = await seriesRepository.salvar(serie2);
 
-    console.log(serieSalva1, serieSalva2);
     expect(serieSalva1.id).not.toBe(serieSalva2.id);
   });
 
