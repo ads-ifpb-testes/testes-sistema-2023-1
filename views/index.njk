@@ -9,7 +9,7 @@
 		<p>Utilize o formulário abaixo para adicionar uma nova série na base de dados</p>
 		<h3>Adicionar Série</h3>
 
-		<form method="post"  action="/series/add">
+		<form method="post" id="form-serie" action="/series/add">
 			<div class="mb-3">
 				<label class="form-label" for="nome">Título:</label>
 				<input class="form-control" type="text" id="titulo" placeholder="Digite o nome" name="titulo" required>
@@ -17,12 +17,12 @@
 				<input class="form-control" type="number" id="ano" placeholder="Digite o ano" name="ano" required>
 			</div>
 			<div class="my-4">
-				<button class="btn btn-primary" type="submit">Adicionar</button>
+				<button class="btn btn-primary" id="botao-enviar" type="submit">Adicionar</button>
 			</div>
 		</form>
 
 		<h3>Séries Adicionadas</h3>
-		<ul class="list-group">
+		<ul id="lista-series" class="list-group">
 			{% for serie in series %}
 				<li class="list-group-item d-flex justify-content-between">
 					<span>{{ serie.titulo }} - {{ serie.ano }}</span>
